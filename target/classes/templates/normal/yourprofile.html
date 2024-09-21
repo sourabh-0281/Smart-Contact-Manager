@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleleaf.org" th:replace="~{normal/userbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+
+    <section>
+	     <div class="card mr-5 pb-2 pt-2 ml-2 " >
+				<div class="container text-center">
+				
+				   <!-- IMAGE AND NAME -->
+				   <img  style="width: 200px; height: 200px; object-fit:cover;" class="mypofile mt-3"  alt="profile" th:src="@{'/img/'+${user.imageUrl}}">
+				    <h1 class="text-center text-capitalize"  th:text="${user.name}"></h1>
+				    
+				<!-- OTHER DETAILS -->
+	             <table class="table mt-5" >
+										  <thead>
+										    <tr>
+										      <th scope="col">#ID</th>
+										      <th scope="col">SCMUSER<span th:text="${user.id}"></span></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <tr>
+										      <th scope="col">Email</th>
+										      <th scope="col"><span th:text="${user.email}"></span></th>
+										    </tr>
+										    
+										
+										    <tr>
+										      <th scope="col">Role</th>
+										      <th scope="col"><span th:text="${user.role}"></span></th>
+										    </tr>
+										    
+										      <tr>
+										      <th scope="col">Account Active</th>
+										      <th scope="col"><span th:text="${user.enabled}"></span></th>
+										    </tr>
+										    
+										    <tr>
+										      <th scope="col">About</th>
+										      <th scope="col"><span th:utext="${user.about}"></span></th>
+										    </tr>
+										    
+										    <tr>
+											     
+					</tbody>
+					</table>
+					 
+				
+							      <!--UPDATE BUTTON -->
+												      <form th:method="post" th:action="@{'/user/updateuserform/'+${user.id}}"   style="display: block;">
+										              <!-- WHEN WE ARE USING POST MAPPING ,BELOW BY DEFAULT IT IS GET MAPPING SO WE ARE PUTTNG THIS IN 
+										                   FORM TAG SO THAT IT WILL SEND POST REQUEST
+										                -->
+										              <button type="submit" class="btn btn-primary btn-small mt-2 text-right" >Update</button>
+										              </form>
+				
+					                 <!-- DELETE BUTTON -->
+								                       <a th:onclick="|deleteuser(${user.id})|"  class="btn btn-danger btn-small mt-2">Delete</a>			      
+				      
+	</div>
+	</div>
+	
+	        <script>
+            $(document).ready(()=>{   //it simpy means when document gets ready it will run the script
+            	$(".item").removeClass("active");
+               	$("#profile-link").addClass("active");
+            });
+         </script>
+	</section>
+	
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"  th:replace=~{normal/userbase::layout(~{::section})}>
+<head>
+	<meta charset="UTF-8" />
+	<title>doante</title>
+</head>
+<body>
+	
+	<section>
+	<div class="card mr-5 pb-2 pt-2 ml-2">
+		<div class="card-body">
+			<div class="container">
+			          <h1 class="text-center my-4">Donate Us</h1>
+			          
+			          <input id="pid" type="text" class="form-control" placeholder="enter amount"/>
+			          
+			          <div class="container text-center mt-3">
+			          <button  onclick="paymentStart()" class="btn btn-success">PAY</button>
+			          </div>
+			</div>
+		</div>
+	</div>
+	
+	  <script>
+            $(document).ready(()=>{   //it simpy means when document gets ready it will run the script
+            	$(".item").removeClass("active");
+               	$("#donate-link").addClass("active");
+            });
+         </script>
+	</section>
+</body>
+</html>

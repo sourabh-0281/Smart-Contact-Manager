@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleleaf.org" th:replace="~{normal/userbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+
+    <section>
+	       
+	          
+	          <!-- BELOW IS UPDATE FORM -->
+	          
+        <div class="card mr-5 pb-2 pt-2 ml-2">
+        	<div class="cardbody">
+        		<h1 class="text-center">Update Contact</h1>
+        		<div class="container-fluid mt-1">
+        		     <div class="row">
+        		        <div class="col-md-10 offset-md-1">
+        		          <form th:action="@{/user/processuserupdate }" th:object="${user}" enctype="multipart/form-data" th:method="post"  class=mt-2>
+        		             
+        		             <!--  The enctype (short for encoding type) attribute in the <form> element specifies how the form data should 
+        		                   be encoded when submitting it to the server.
+        		             
+        		                multipart/form-data
+								This encoding type is used when a form includes file upload fields (<input type="file">).
+								It encodes the form data as a MIME message where each part is separated by a boundary string.
+        		               -->
+        		           <input type="hidden" class="form-control" name="id" placeholder="Username" th:value="${user.id}">
+        		         
+        		           <!-- FIRST NAME -->
+        		           
+        		           <div class="input-group mb-3">  
+		        		             <div class="input-group-prepend">
+									          <div class="input-group-text "> 
+									             <i class="fa fa-plus"></i>
+									          </div>
+									 </div>
+								    <input type="text" class="form-control" name="name" placeholder="Username"
+								    		th:value="${user.name}"
+								            th:classappend="${#fields.hasErrors('name')} ?  'is-invalid' : '' "
+								    >
+								    <div th:each="e:${#fields.errors('name')}" th:text="${e}" class="invalid-feedback"></div>
+        		             </div>
+        		             
+        		             
+        		       <!-- EMAIL -->
+						     
+        		           <div class="input-group mb-3">  
+        		             <div class="input-group-prepend">
+							          <div class="input-group-text "> 
+							             @
+							          </div>
+							 </div>
+							    <input type="email" class="form-control" name="email" placeholder="Email"
+							           th:value="${user.email}"
+							           th:classappend="${#fields.hasErrors('email')} ?  'is-invalid' : '' "
+							    >
+							     <div th:each="e:${#fields.errors('email')}" th:text="${e}" class="invalid-feedback"></div>
+							     
+							        <input type="hidden" class="form-control" name="oldm" placeholder="Email"  th:value="${oldm}"
+							      >
+        		             </div>  
+        		             
+        		             
+        		           <!-- ROLE -->
+						     
+        		           <div class="input-group mb-3">  
+        		             <div class="input-group-prepend">
+							          <div class="input-group-text "> 
+							             <i class="fa fa-briefcase"></i>
+							          </div>
+							 </div>
+							    <input type="text" class="form-control" name="role" placeholder="Enter your role here"
+							          th:value="${user.role}"
+							          th:classappend="${#fields.hasErrors('role')} ?  'is-invalid' : '' "
+							    >
+							     <div th:each="e:${#fields.errors('role')}" th:text="${e}" class="invalid-feedback"></div>
+        		             </div>  
+        		             
+        		             
+        		        <!-- ABOUT -->
+						     
+        		           <div class="form-group mb-3">
+        		             <textarea  name="about" rows="5" cols="30" class="form-control" placeholder="Enter About User"
+        		                       th:text="${user.about}"
+        		                       th:classappend="${#fields.hasErrors('about')} ?  'is-invalid' : '' "
+        		             ></textarea>  
+        		              <div th:each="e:${#fields.errors('about')}" th:text="${e}" class="invalid-feedback"></div>
+        		         </div>     
+        		         
+        		         
+        		        <!-- IMAGE -->
+        		        <div class="container mb-2">
+              		        <img  style="height:200px; width: 200px; " class="mypofile"  alt="profile" th:src="@{'/img/'+${user.imageUrl}}">
+              		    </div>
+        		        
+        		        <div class="customfile mb-2">
+        		        <p class="text-secondary mb-0 mt-2">Choose new profile photo</p>
+        		          <input type="file" name="userproimage"
+        		                accept=".jpg, .jpeg, .png"             		             
+        		          />
+        		        </div>
+        		         
+        		         
+        		         <!-- SAVE BUTTON -->
+        		         
+        		        <div class="container text-center">
+        		            <button class="btn btn-outline-primary">Save contact</button>
+        		        </div>     
+        		         
+        		      </form>
+        		        </div>
+        		     </div>
+        		</div>
+        	</div>
+        </div>
+        
+	          
+	          
+	</section>
+	
+</body>
+</html>

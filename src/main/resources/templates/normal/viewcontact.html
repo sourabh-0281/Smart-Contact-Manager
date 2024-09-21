@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleleaf.org" th:replace="~{normal/userbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+
+    <section>
+	
+	<div class="card mr-5 pb-2 pt-2 ml-2">
+
+		<div class="cardbody" >
+		        <div class="card-body">
+		     <h1 class="text-center">Your contacts</h1>
+		     
+		              <!-- SEARCH  -->
+		            <div class="search-container my-4">
+		                    <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contact here" />
+				                    <div class="search-result">
+				                                     
+				                    </div>
+		            </div>
+		            
+		           <!-- DISPLAY DETAILS -->
+		           <div class="table-responsive"> 
+		                <table class="table table-hover">
+								  <thead class="thead-light">
+								    <tr>
+								      <th scope="col">#Id</th>
+								      <th scope="col">Name</th>
+								      <th scope="col">Email</th>
+								      <th scope="col">Phone</th>
+								       <th scope="col">Action</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <tr th:each="c:${contact}">
+								    
+								      	<!-- DISPLAY ID  -->
+								      <th scope="row"  th:text="${'SCM2024'+c.id}"></th>
+								      
+								      	<!-- DISPLAY NAME -->
+								      <td >
+								           <img  class="mypofile"  alt="profile" th:src="@{'/img/'+${c.image}}">
+								          <span th:text="${c.name}"></span>
+								        </td>
+								        
+								        <!-- DISPLAY EMAIL -->
+								           <!-- To handle particular contact detail -->
+								      <td >
+								            <a th:href="@{'/user/particularcontact/'+${c.id}}">
+								                 <span th:text="${c.email}"></span>
+								            </a>
+								      </td>
+								      
+								      <!-- DISPLAY PHONE -->
+								      <td th:text="${c.phone}"></td>
+								      
+								      <!-- UPDATE/DELETE BUTTON -->
+								       <!-- SYNTAX TO PASS DYNAMIC VALUE FIR JAVASCRIPT FUNCTION  -->
+								       
+								      <td> <a th:onclick="|deletecontact(${c.id})|"  class="btn btn-danger btn-small">Delete</a> 
+								      
+								      
+								              <form th:method="post" th:action="@{'/user/updateform/'+${c.id}}">
+								              <!-- WHEN WE ARE USING POST MAPPING ,BELOW BY DEFAULT IT IS GET MAPPING SO WE ARE PUTTNG THIS IN FORM TAG
+								                  SO THAT IT WILL SEND POST REQUEST
+								                -->
+								              <button type="submit" class="btn btn-primary btn-small mt-2">Update</button>
+								              </form>
+								               
+								      </td>
+								    </tr>
+								  </tbody>
+							</table>
+							</div>
+							
+							<!-- PAGINATION -->
+							
+							<nav aria-label="Page navigation example" class="mx-2">
+							  <ul class="pagination">
+							    <li th:if="${currentpage != 0}" class="page-item ">
+							                  <a th:href="@{'/user/viewcontacts/'+${currentpage-1}}" class="page-link " >Previous</a>
+							      </li>
+							    
+							    <li th:classappend="${currentpage==i-1} ? 'active': '' " th:each="i:${#numbers.sequence(1,totalpages)}" class="page-item">
+							           <a class="page-link" th:href="@{'/user/viewcontacts/'+${i-1}}"><span th:text="${i}"></span></a>
+							      </li>
+							    
+							    <li th:if="${currentpage+1 != totalpages}" class="page-item"><a th:href="@{'/user/viewcontacts/'+${currentpage+1}}" class="page-link" href="#">Next</a></li>
+							  </ul>
+							</nav>
+		</div>
+		</div>
+	</div>
+	
+	  <script>
+            $(document).ready(()=>{   //it simpy means when document gets ready it will run the script
+            	$(".item").removeClass("active");
+               	$("#view-link").addClass("active");
+            });
+         </script>
+	</section>
+	
+</body>
+</html>

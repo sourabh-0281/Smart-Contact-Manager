@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleleaf.org" th:replace="~{normal/userbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+
+    <section>
+          <div class="container">
+	               <div class="card">
+	               	<div class="card-body my-5">
+	               	        <div class="container text-center">
+	               	        
+	                        <img  style="width: 300px; height: 300px; object-fit:cover;" class="mypofile mt-3"  alt="profile" th:src="@{'/img/userdashboard.png'}">
+	                      </div>
+	                      <h1 class="text-center text-secondary mt-3">Start Adding your contacts on cloud</h1>
+	                      <div class="text-center">
+     	                      <a th:href="@{/user/addcontact}" class="mt-3 btn btn-primary text-uppercase">Add New Contact</a>
+	                      </div>
+	                               
+	               	</div>
+                  </div>
+         </div>
+         
+           <script>
+            $(document).ready(()=>{   //it simpy means when document gets ready it will run the script
+            	$(".item").removeClass("active");
+               	$("#home-link").addClass("active");
+            });
+         </script>
+
+	</section>
+	
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymleleaf.org" th:replace="~{normal/userbase::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+<body>
+
+    <section>
+         
+         <div class="container">
+         	<div class="row">
+         		<div class="col-md-12">
+         			<div class="card">
+         				<div class="card-body">
+         				       <h1 class="mb-3">Change Password</h1>
+         				       
+         				       
+         				       <form th:action="@{/user/processsettings}" method="post">
+         				           <!--  old password -->
+         				           <div class="form-group ">
+         				            <input name="oldp" type="password" class="form-control" placeholder="Enter old password" />
+          				           </div>
+         				           
+         				          <!--  new password -->
+         				           <div class="form-group">
+         				                <input name="newp" type="password" class="form-control" placeholder="Enter new password">
+         				           </div>
+         				           
+         				           <!-- Change -->
+         				           <div class="container text-center">
+         				                 <button type="submit" class=" btn btn-success">Change</button>
+      									<button type="reset" class=" btn btn-warning">Reset</button>
+         				           </div>
+         				       </form>
+         				 </div>
+         			</div>
+         		</div>
+         	</div>
+         </div>
+         
+         
+    
+             <script>
+            $(document).ready(()=>{   //it simpy means when document gets ready it will run the script
+            	$(".item").removeClass("active");
+               	$("#settings-link").addClass("active");
+            });
+         </script>     
+	</section>
+	
+	
+	
+</body>
+</html>

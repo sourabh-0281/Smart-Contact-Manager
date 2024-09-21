@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Login</title>	
+</head>
+<body>
+
+        
+    <section>
+        <div id="login">
+        <h3 class="text-center text-white pt-5"></h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12" style="height: 220px">
+                              
+                      <!-- SESSION HANDLING -->
+				             <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert mt-3 " role="alert">
+								 <p class="text-center" th:text="${session.message.contend}">  </p>
+								</div>
+								<script th:if="${session.message}">
+									        window.onload = function() {
+									            fetch('/clear-session-message', {
+									                method: 'POST'
+									            });
+									        };
+							    </script>
+                              
+                              
+                              
+                           <div th:unless="${session.message}" class="alert alert-success text-center m-3">We have successfully send OTP to your Email</div>
+                           
+                           
+                           
+                            
+                            <!-- FORM -->
+     						<form th:action="@{/verify}" method="post" >
+     						          <input type="hidden" th:value="${tocheckotp}" name="hotp">
+     						          <input type="hidden" th:value="${mail}"  name="mail">
+     						       <div class="form-group mt-3">
+     						            <input  required="required" class="form-control" type="number" placeholder="Enter OTP" name="otp">
+     						       </div>     
+     						       
+     						       <div class="container text-center">
+     						       <button type="submit" class="btn btn-warning">Veriify</button>
+     						       </div>
+     						</form>               	
+            
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+	
+</body>
+</html>

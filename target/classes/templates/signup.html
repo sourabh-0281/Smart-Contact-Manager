@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  th:replace="~{base::layout(~{::section})}">
+<head>
+	<meta charset="UTF-8" />
+	<title>Signup</title>
+</head>
+<body class="signupclass">
+	
+	<section >
+	  <div class="container">
+	  	<div class="row ">
+	  	    <div class="row1 col-md-8  offset-md-2">
+	
+	            <div class="mycard  mt-4 mb-3">
+	            
+	             <!-- Alert message -->
+	             
+				       <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert " role="alert">
+						 <p class="text-center" th:text="${session.message.contend}">  </p>
+						 <th:block th:remove="all"></th:block>
+						</div>
+	            
+			            <div class="container text-center mb-2">
+			            	    <img style="width:80px" th:src="@{/img/membership.png}" alt="" />
+			            </div>
+	
+	                  <h1 class="title text-center"> Register Here!!</h1>
+	                  
+	                   <form th:action="@{/do_register}" method="post" th:object="${user}">
+	                       	
+	              <!-- name field -->
+	                       
+	                    <div class="form-group">
+	                 	    <label for="namefield">Your Name</label>
+							<input type="text" 
+							       name="name"
+							       class="form-control"
+							       th:classappend="${#fields.hasErrors('name') ?  'is-invalid' : ''}" 
+							       id="namefield" 
+							       aria-describedby="emailHelp" 
+							       placeholder="Enter here"
+							       required
+							       th:value="${user.name}"
+							       >
+							      <div class="invalid-feedback font-weight-bold" th:each=" e : ${#fields.errors('name')}" th:text="${e}"></div> 						       
+						</div>
+						
+	               <!-- Email field -->
+	                       
+	                    <div class="form-group">
+	                 	    <label for="emailfield">Your Email</label>
+							<input type="email"
+							       name="email"  
+							       class="form-control" 
+							       id="emailfield" 
+							       aria-describedby="emailHelp" 
+							       placeholder="Enter here"
+							       required
+						           th:value="${user.email}"
+							       >
+							       
+						</div>
+						
+	               <!-- Password field -->
+	                       
+	                    <div class="form-group">
+	                 	    <label for="passwordfield">Your Password</label>
+							<input type="password"
+								name="password" 
+							       class="form-control" 
+							       id="passwordfield" 
+							       aria-describedby="emailHelp" 
+							       placeholder="Enter here"
+							       required
+							       >
+							       
+						</div>
+						
+						
+				<!-- About Field -->
+						
+						<div  class="form-group">
+							<textarea name="about"	
+									  th:text="${user.about}" 
+									  placeholder="Enter something about yourself" 
+									  rows="5" 
+									  class="form-control text-left">
+							</textarea>
+							<!-- IN TEXT AREA WE SHOULD USE th:text -->
+						</div>
+						
+						
+			   <!-- Terms and Conditions -->
+						 <div class="form-group form-check ">
+						    <input type="checkbox" 
+						       name="agreement"
+						       class="form-check-input"
+						       id="agreement"
+						       
+						    />
+						    <label for="agreement"> Accept Terms and Condition</label>
+						 </div>
+						 
+	                     
+	                <!-- Button --> 
+	                     
+	                     <div class="container text-center">
+	                         <button type="submit" class="btn bg-primary text-white">
+	                         	Submit
+	                         </button>
+	                         <button type="reset" class="btn btn-warning">
+	                         	Reset
+	                         </button>
+	                     </div>
+	                         
+	                </form>
+	           </div> 
+	  	    </div>
+	  	</div>
+	  </div>
+	</section>
+	
+</body>
+</html>
